@@ -1,6 +1,12 @@
-# Datheon Testing AI
+# ✦ Datheon Testing AI
 
-A polished Streamlit chatbot project with:
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://datheon-ai-chatbot-qixsf5cbxvwwbdjoyc4huy.streamlit.app/)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> 🌐 **Live Demo Application**: [https://datheon-ai-chatbot-qixsf5cbxvwwbdjoyc4huy.streamlit.app/](https://datheon-ai-chatbot-qixsf5cbxvwwbdjoyc4huy.streamlit.app/)
+
+A polished Streamlit chatbot workspace with:
 - Dark, Light, and Midnight themes
 - Streamlit chat interface and progressive token streaming
 - Gemini, OpenAI, and Groq provider options plus Demo Mode

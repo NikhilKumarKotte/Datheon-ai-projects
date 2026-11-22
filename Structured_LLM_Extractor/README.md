@@ -1,13 +1,16 @@
 # ⚡ Structured LLM Extractor
 
-[![CI Pipeline](https://github.com/your-org/structured-llm-extractor/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/structured-llm-extractor/actions)
-![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg?logo=fastapi&logoColor=white)
-![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063.svg?logo=pydantic&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+[![Render Live Demo](https://img.shields.io/badge/Render-Live%20Demo%20%26%20UI-46E3B7.svg?logo=render&logoColor=white)](https://datheon-ai-projects.onrender.com/)
+[![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063.svg?logo=pydantic&logoColor=white)](https://docs.pydantic.dev/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?logo=docker&logoColor=white)](Dockerfile)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-An enterprise-ready, production-deployable document extraction pipeline and REST API. Powered by a **Multi-Provider LLM Engine** (**Google Gemini**, **GroqCloud**, **Cerebras**, and **OpenRouter**) and **Pydantic v2**, it deterministically extracts strongly-typed, schema-validated JSON from unstructured documents (such as invoices, receipts, and resumes) with zero hallucination of schema keys and intelligent cross-provider failover.
+> 🌐 **Live Demo Application**: [https://datheon-ai-projects.onrender.com/](https://datheon-ai-projects.onrender.com/)  
+> 📖 **Interactive Swagger API Docs**: [https://datheon-ai-projects.onrender.com/docs](https://datheon-ai-projects.onrender.com/docs)
+>
+> An enterprise-ready, production-deployable document extraction pipeline and REST API. Powered by a **Multi-Provider LLM Engine** (**Google Gemini**, **GroqCloud**, **Cerebras**, and **OpenRouter**) and **Pydantic v2**, it deterministically extracts strongly-typed, schema-validated JSON from unstructured documents (such as invoices, receipts, and resumes) with zero hallucination of schema keys and intelligent cross-provider failover.
 
 Includes a **FastAPI REST API**, an **interactive Web UI dashboard**, a **CLI tool**, **Docker containerization**, and a comprehensive **pytest test suite (44 tests, 100% pass rate)**.
 

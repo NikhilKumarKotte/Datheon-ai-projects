@@ -1,12 +1,14 @@
 # 📄 Document Q&A Assistant with RAG & Vector Embeddings
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://document-assistant-ybhbrdyommnmmjajqkawcb.streamlit.app/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![LangChain](https://img.shields.io/badge/LangChain-1.x%20%7C%20LCEL%20%2B%20RetrievalQA-00A67E.svg)](https://python.langchain.com/)
 [![ChromaDB](https://img.shields.io/badge/VectorDB-ChromaDB-orange.svg)](https://www.trychroma.com/)
 [![FAISS](https://img.shields.io/badge/VectorDB-FAISS-purple.svg)](https://github.com/facebookresearch/faiss)
-[![Tests](https://img.shields.io/badge/Tests-local%20verification%20required-yellow.svg)](tests/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
+> 🌐 **Live Demo Application**: [https://document-assistant-ybhbrdyommnmmjajqkawcb.streamlit.app/](https://document-assistant-ybhbrdyommnmmjajqkawcb.streamlit.app/)
+>
 > A modular **Retrieval-Augmented Generation (RAG)** system engineered to answer complex questions strictly based on custom documents (PDF, TXT, Markdown) with source references with page metadata, audio speech playback, and document-grounded answering with explicit uncertainty handling.
 
 ---

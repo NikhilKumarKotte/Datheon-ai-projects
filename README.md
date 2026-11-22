@@ -13,14 +13,27 @@
 
 ---
 
+## 🚀 Live Production Demos
+
+All 4 projects in this monorepo are actively deployed and available online:
+
+| Project | Live Demo Badge | Direct Application Link | Deployment Platform |
+| :--- | :---: | :--- | :--- |
+| **01. Datheon Testing AI** | [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://datheon-ai-chatbot-qixsf5cbxvwwbdjoyc4huy.streamlit.app/) | [**datheon-ai-chatbot.streamlit.app**](https://datheon-ai-chatbot-qixsf5cbxvwwbdjoyc4huy.streamlit.app/) | Streamlit Community Cloud |
+| **02. Document Q&A Assistant** | [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://document-assistant-ybhbrdyommnmmjajqkawcb.streamlit.app/) | [**document-assistant.streamlit.app**](https://document-assistant-ybhbrdyommnmmjajqkawcb.streamlit.app/) | Streamlit Community Cloud |
+| **03. Multi-Tool Autonomous AI Agent** | [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://multi-ai-agent-dk55bmhxtyidux7uufbrjj.streamlit.app/) | [**multi-ai-agent.streamlit.app**](https://multi-ai-agent-dk55bmhxtyidux7uufbrjj.streamlit.app/) | Streamlit Community Cloud |
+| **04. Structured LLM Extractor** | [![Render](https://img.shields.io/badge/Render-Live%20API%20%26%20UI-46E3B7.svg?logo=render&logoColor=white)](https://datheon-ai-projects.onrender.com/) | [**datheon-ai-projects.onrender.com**](https://datheon-ai-projects.onrender.com/) | Render Cloud Web Service |
+
+---
+
 ## 🌟 Executive Project Overview
 
-| # | Project Name | Primary Focus | Core Technologies | User Interface | Live Deployment Target |
-| :-: | :--- | :--- | :--- | :--- | :--- |
-| **01** | [**Datheon Testing AI**](./Datheon_Testing_AI/README.md) | Adaptive Chatbot & Dual Memory | Streamlit, LangChain, ChromaDB, Sentence-Transformers, SQLite3 | Dark, Light & Midnight Streamlit Chat UI | **Streamlit Community Cloud** |
-| **02** | [**Document Q&A Assistant**](./Document_QA_RAG_Assistant/README.md) | Enterprise RAG & Vector Embeddings | LangChain, ChromaDB, FAISS, PyPDF, HuggingFace, Web Speech API | Linear-inspired Streamlit UI + Terminal CLI | **Streamlit Community Cloud** |
-| **03** | [**Multi-Tool Autonomous AI Agent**](./Multi_Tool_Autonomous_AI_Agent/README.md) | Autonomous ReAct Research Agent | LangChain, DuckDuckGo Search, Safe AST Math, Sandboxed File Reader | Obsidian Streamlit UI + Interactive REPL | **Streamlit Cloud / Docker** |
-| **04** | [**Structured LLM Extractor**](./Structured_LLM_Extractor/README.md) | Universal Document Parser & REST API | FastAPI, Gemini Structured Outputs, Pydantic v2, OCR Vision | Glassmorphism Web Dashboard + OpenAPI Docs | **Render / Cloud Run** |
+| # | Project Name | Primary Focus | Core Technologies | User Interface | Live Demo |
+| :-: | :--- | :--- | :--- | :--- | :---: |
+| **01** | [**Datheon Testing AI**](./Datheon_Testing_AI/README.md) | Adaptive Chatbot & Dual Memory | Streamlit, LangChain, ChromaDB, Sentence-Transformers, SQLite3 | Dark, Light & Midnight Streamlit Chat UI | [**Launch Chatbot ↗**](https://datheon-ai-chatbot-qixsf5cbxvwwbdjoyc4huy.streamlit.app/) |
+| **02** | [**Document Q&A Assistant**](./Document_QA_RAG_Assistant/README.md) | Enterprise RAG & Vector Embeddings | LangChain, ChromaDB, FAISS, PyPDF, HuggingFace, Web Speech API | Linear-inspired Streamlit UI + Terminal CLI | [**Launch RAG Assistant ↗**](https://document-assistant-ybhbrdyommnmmjajqkawcb.streamlit.app/) |
+| **03** | [**Multi-Tool Autonomous AI Agent**](./Multi_Tool_Autonomous_AI_Agent/README.md) | Autonomous ReAct Research Agent | LangChain, DuckDuckGo Search, Safe AST Math, Sandboxed File Reader | Obsidian Streamlit UI + Interactive REPL | [**Launch AI Agent ↗**](https://multi-ai-agent-dk55bmhxtyidux7uufbrjj.streamlit.app/) |
+| **04** | [**Structured LLM Extractor**](./Structured_LLM_Extractor/README.md) | Universal Document Parser & REST API | FastAPI, Gemini Structured Outputs, Pydantic v2, OCR Vision | Glassmorphism Web Dashboard + OpenAPI Docs | [**Launch Extractor Web UI ↗**](https://datheon-ai-projects.onrender.com/) |
 
 ---
 
@@ -39,7 +52,7 @@ flowchart TD
             P1_LLM --> P1_DB[("Local SQLite History")]
         end
 
-        subgraph P2 ["02. Document Q&A Assistant (RAG)"]
+        subgraph P2 ["02. Document Q-A Assistant (RAG)"]
             P2_Input["PDF / TXT Ingestion"] --> P2_Chunk["Recursive Chunker (Page-Tracked)"]
             P2_Chunk --> P2_VDB["Dual Vector Stores (ChromaDB / FAISS)"]
             P2_Query["User Question"] --> P2_HyDE["Multi-Query Expansion & Contextualizer"]
@@ -149,32 +162,28 @@ pip install -r requirements/structured_llm_extractor.txt
 
 ---
 
-## ☁️ Deployment Matrix & Step-by-Step Hosting Guide
+## ☁️ Deployment Matrix & Live URL Directory
 
-Deploying this multi-project monorepo is modular, streamlined, and free:
-
-| Project | Best Platform | Pricing Tier | Entry File / Build Configuration |
+| Project | Platform | Entry File Path | Live Public Application URL |
 | :--- | :--- | :--- | :--- |
-| **01. Datheon Testing AI** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Datheon_Testing_AI/app.py` |
-| **02. Document Q&A Assistant** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Document_QA_RAG_Assistant/app.py` |
-| **03. Multi-Tool Autonomous Agent** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Multi_Tool_Autonomous_AI_Agent/web_app.py` |
-| **04. Structured LLM Extractor** | [Render.com](https://render.com) | **100% Free** | Root dir: `Structured_LLM_Extractor`<br>Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT` |
+| **01. Datheon Testing AI** | Streamlit Community Cloud | `Datheon_Testing_AI/app.py` | [**datheon-ai-chatbot.streamlit.app ↗**](https://datheon-ai-chatbot-qixsf5cbxvwwbdjoyc4huy.streamlit.app/) |
+| **02. Document Q-A Assistant** | Streamlit Community Cloud | `Document_QA_RAG_Assistant/app.py` | [**document-assistant.streamlit.app ↗**](https://document-assistant-ybhbrdyommnmmjajqkawcb.streamlit.app/) |
+| **03. Multi-Tool Autonomous Agent** | Streamlit Community Cloud | `Multi_Tool_Autonomous_AI_Agent/web_app.py` | [**multi-ai-agent.streamlit.app ↗**](https://multi-ai-agent-dk55bmhxtyidux7uufbrjj.streamlit.app/) |
+| **04. Structured LLM Extractor** | Render Web Service | `uvicorn main:app --host 0.0.0.0 --port $PORT` | [**datheon-ai-projects.onrender.com ↗**](https://datheon-ai-projects.onrender.com/) |
 
 ---
 
-### Deploying Projects 1, 2, and 3 to Streamlit Community Cloud
+### Deploying to Streamlit Community Cloud
 
 Streamlit Community Cloud allows you to host multiple applications from the same GitHub repository:
 
 1. Log in to [share.streamlit.io](https://share.streamlit.io) with your GitHub account.
 2. Click **Create app** -> **I already have an app**.
-3. Fill in the details:
-   - **Repository**: `NikhilKumarKotte/Datheon-ai-projects`
-   - **Branch**: `main`
-4. **Specify the exact file path for each app (No spaces in paths!)**:
+3. Select repository `NikhilKumarKotte/Datheon-ai-projects` and branch `main`.
+4. **Specify the exact file path for each app (Space-Free)**:
    - For **Datheon Testing AI**:
      - `Main file path`: `Datheon_Testing_AI/app.py`
-   - For **Document Q&A Assistant**:
+   - For **Document Q-A Assistant**:
      - `Main file path`: `Document_QA_RAG_Assistant/app.py`
    - For **Multi-Tool Autonomous AI Agent**:
      - `Main file path`: `Multi_Tool_Autonomous_AI_Agent/web_app.py`
@@ -186,30 +195,26 @@ Streamlit Community Cloud allows you to host multiple applications from the same
      OPENAI_API_KEY = "sk-..."
      GROQ_API_KEY = "gsk_..."
      ```
-6. Click **Deploy!**. Within 2 minutes, your live web application will be accessible via a public HTTPS URL.
+6. Click **Deploy!**.
 
 ---
 
-### Deploying Project 4 (Structured LLM Extractor) to Render
+### Deploying to Render (Structured LLM Extractor)
 
-Render is the ideal free cloud platform for FastAPI web applications with background workers and Swagger documentation:
-
-1. Create a free account at [dashboard.render.com](https://dashboard.render.com).
+1. Create an account at [dashboard.render.com](https://dashboard.render.com).
 2. Click **New +** -> **Web Service**.
 3. Connect your GitHub repository: `NikhilKumarKotte/Datheon-ai-projects`.
 4. Fill in the service configuration:
    - **Name**: `datheon-structured-extractor`
-   - **Region**: Closest to you (e.g., Frankfurt, Oregon, Singapore)
    - **Branch**: `main`
-   - **Root Directory**: `Structured_LLM_Extractor` *(Ensures Render builds in the right subfolder)*
+   - **Root Directory**: `Structured_LLM_Extractor`
    - **Runtime**: `Python 3`
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
    - **Instance Type**: `Free`
 5. **Add Environment Variable**:
-   - Key: `GEMINI_API_KEY`
-   - Value: `your_gemini_api_key_here`
-6. Click **Create Web Service**. Once deployed, Render will provide a URL like `https://datheon-structured-extractor.onrender.com` where both the Glassmorphism UI (at `/`) and interactive OpenAPI Swagger docs (at `/docs`) are immediately live.
+   - Key: `GEMINI_API_KEY` | Value: `your_gemini_api_key_here`
+6. Click **Create Web Service**. Live at `https://datheon-ai-projects.onrender.com/` (UI) and `/docs` (Swagger).
 
 ---
 
@@ -218,7 +223,7 @@ Render is the ideal free cloud platform for FastAPI web applications with backgr
 Every project in this suite includes a dedicated automated test suite verifying edge cases, zero-division, sandboxing security, schema validation, and retrieval accuracy:
 
 ```powershell
-# Run tests for Project 02 (Document Q&A Assistant) - 16 Tests
+# Run tests for Project 02 (Document Q-A Assistant) - 16 Tests
 cd "Document_QA_RAG_Assistant"
 python -m pytest tests/ -v
 cd ..

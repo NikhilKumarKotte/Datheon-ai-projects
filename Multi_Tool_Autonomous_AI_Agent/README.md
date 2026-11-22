@@ -1,5 +1,6 @@
 # 🤖 Multi-Tool Autonomous AI Agent for Research
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://multi-ai-agent-dk55bmhxtyidux7uufbrjj.streamlit.app/)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg)](https://www.python.org/)
 [![LangChain](https://img.shields.io/badge/LangChain-v0.3%2B-green.svg)](https://www.langchain.com/)
 [![DuckDuckGo](https://img.shields.io/badge/Search-DuckDuckGo%20%7C%20Tavily-orange.svg)](https://duckduckgo.com/)
@@ -7,7 +8,9 @@
 [![Tests](https://img.shields.io/badge/Tests-19%20Passing-brightgreen.svg)](tests/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](Dockerfile)
 
-An enterprise-grade, autonomous multi-tool AI research agent built with **LangChain**, **Python 3**, and **DuckDuckGo Search**. The agent autonomously decomposes complex, compound research queries into multi-step reasoning steps following the **ReAct (Reasoning + Acting)** paradigm:
+> 🌐 **Live Demo Application**: [https://multi-ai-agent-dk55bmhxtyidux7uufbrjj.streamlit.app/](https://multi-ai-agent-dk55bmhxtyidux7uufbrjj.streamlit.app/)
+>
+> An enterprise-grade, autonomous multi-tool AI research agent built with **LangChain**, **Python 3**, and **DuckDuckGo Search**. The agent autonomously decomposes complex, compound research queries into multi-step reasoning steps following the **ReAct (Reasoning + Acting)** paradigm:
 
 $$\text{Thought} \longrightarrow \text{Action} \longrightarrow \text{Observation} \longrightarrow \text{Final Answer}$$
 
