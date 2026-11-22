@@ -8,8 +8,15 @@ Professional, humanized, and feature-complete RAG application engineered for:
 """
 
 import os
+import sys
 import json
 from pathlib import Path
+
+# Ensure project directory is at front of sys.path for robust cloud deployment
+PROJECT_ROOT = Path(__file__).resolve().parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 import streamlit as st
 import streamlit.components.v1 as components
 from langchain_core.documents import Document

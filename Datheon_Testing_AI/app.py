@@ -1,8 +1,15 @@
-import os, re, uuid, sqlite3, time, json
+import os, sys, re, uuid, sqlite3, time, json
+from pathlib import Path
 from datetime import datetime
 from collections import Counter
 import streamlit as st
 from dotenv import load_dotenv
+
+# Ensure project directory is in sys.path for robust cloud imports
+BASE_DIR = Path(__file__).resolve().parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
+
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from memory_store import SemanticMemory, MEMORY_AVAILABLE, MEMORY_ERROR
 
@@ -10,10 +17,10 @@ load_dotenv()
 st.set_page_config(page_title="Datheon Testing AI", page_icon="✦", layout="wide", initial_sidebar_state="expanded")
 
 APP_NAME = "DATHEON TESTING AI"
-DB_PATH = os.path.join("data", "chat_history.db")
+DB_PATH = str(BASE_DIR / "data" / "chat_history.db")
 RECENT_MEMORY_MESSAGES = 12
-SEMANTIC_MEMORY_DIR = os.path.join("data", "semantic_memory")
-os.makedirs("data", exist_ok=True)
+SEMANTIC_MEMORY_DIR = str(BASE_DIR / "data" / "semantic_memory")
+os.makedirs(BASE_DIR / "data", exist_ok=True)
 
 @st.cache_resource
 def get_semantic_memory():

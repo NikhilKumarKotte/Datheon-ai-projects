@@ -9,6 +9,7 @@ from pathlib import Path
 # Add project root to sys.path to allow running directly from repository root
 sys.path.insert(0, str(Path(__file__).parent))
 
+from src.extractor.api.app import app
 from src.extractor.cli import main
 from src.extractor.core.service import extract_document
 from src.extractor.schemas.invoice import InvoiceData, InvoiceLineItem
@@ -16,6 +17,7 @@ from src.extractor.schemas.receipt import ReceiptData, ReceiptLineItem
 from src.extractor.schemas.resume import ResumeData
 
 __all__ = [
+    "app",
     "main",
     "extract_document",
     "InvoiceData",
