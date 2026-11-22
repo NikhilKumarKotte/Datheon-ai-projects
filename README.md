@@ -18,9 +18,9 @@
 | # | Project Name | Primary Focus | Core Technologies | User Interface | Live Deployment Target |
 | :-: | :--- | :--- | :--- | :--- | :--- |
 | **01** | [**Datheon Testing AI**](./Datheon_Testing_AI/README.md) | Adaptive Chatbot & Dual Memory | Streamlit, LangChain, ChromaDB, Sentence-Transformers, SQLite3 | Dark, Light & Midnight Streamlit Chat UI | **Streamlit Community Cloud** |
-| **02** | [**Document Q&A Assistant**](./Document%20Q%20&%20A%20Assistant%20with%20RAG%20&%20Vector%20Embedding/README.md) | Enterprise RAG & Vector Embeddings | LangChain, ChromaDB, FAISS, PyPDF, HuggingFace, Web Speech API | Linear-inspired Streamlit UI + Terminal CLI | **Streamlit Community Cloud** |
+| **02** | [**Document Q-A Assistant**](./Document%20Q-A%20Assistant%20with%20RAG%20%20Vector%20Embedding/README.md) | Enterprise RAG & Vector Embeddings | LangChain, ChromaDB, FAISS, PyPDF, HuggingFace, Web Speech API | Linear-inspired Streamlit UI + Terminal CLI | **Streamlit Community Cloud** |
 | **03** | [**Multi-Tool Autonomous AI Agent**](./Multi-Tool%20Autonomous%20AI%20Agent/README.md) | Autonomous ReAct Research Agent | LangChain, DuckDuckGo Search, Safe AST Math, Sandboxed File Reader | Obsidian Streamlit UI + Interactive REPL | **Streamlit Cloud / Docker** |
-| **04** | [**Structured LLM Extractor**](./Structured%20LLM%20Prompt%20Pipeline%20&%20JSON%20Extractor/README.md) | Universal Document Parser & REST API | FastAPI, Gemini Structured Outputs, Pydantic v2, OCR Vision | Glassmorphism Web Dashboard + OpenAPI Docs | **Render / Cloud Run** |
+| **04** | [**Structured LLM Extractor**](./Structured%20LLM%20Prompt%20Pipeline%20-%20JSON%20Extractor/README.md) | Universal Document Parser & REST API | FastAPI, Gemini Structured Outputs, Pydantic v2, OCR Vision | Glassmorphism Web Dashboard + OpenAPI Docs | **Render / Cloud Run** |
 
 ---
 
@@ -39,7 +39,7 @@ flowchart TD
             P1_LLM --> P1_DB[("Local SQLite History")]
         end
 
-        subgraph P2 ["02. Document Q&A Assistant (RAG)"]
+        subgraph P2 ["02. Document Q-A Assistant (RAG)"]
             P2_Input["PDF / TXT Ingestion"] --> P2_Chunk["Recursive Chunker (Page-Tracked)"]
             P2_Chunk --> P2_VDB["Dual Vector Stores (ChromaDB / FAISS)"]
             P2_Query["User Question"] --> P2_HyDE["Multi-Query Expansion & Contextualizer"]
@@ -76,6 +76,15 @@ flowchart TD
 datheon-projects/
 ├── .gitignore                                                    # Global monorepo ignore rules (venv, env, data caches)
 ├── README.md                                                     # Master portfolio & documentation portal
+├── requirements.txt                                              # Consolidated root requirements for cloud deployments
+│
+├── requirements/                                                 # Modular dependency manifests directory
+│   ├── all.txt                                                   # Master suite dependencies (all 4 projects)
+│   ├── datheon_testing_ai.txt                                    # Project 01 requirements
+│   ├── document_qa_rag.txt                                       # Project 02 requirements
+│   ├── multi_tool_agent.txt                                      # Project 03 requirements
+│   ├── structured_llm_extractor.txt                              # Project 04 requirements
+│   └── README.md                                                 # Dependency documentation & installation guide
 │
 ├── Datheon_Testing_AI/                                           # Project 01: Conversational Workspace
 │   ├── .streamlit/config.toml                                    # Streamlit theme & layout configuration
@@ -86,7 +95,7 @@ datheon-projects/
 │   ├── .env.example                                              # Environment variable template
 │   └── README.md                                                 # Dedicated project documentation
 │
-├── Document Q&A Assistant with RAG & Vector Embedding/            # Project 02: Enterprise RAG System
+├── Document Q-A Assistant with RAG  Vector Embedding/            # Project 02: Enterprise RAG System
 │   ├── src/                                                      # Core RAG library (loaders, chunkers, vector store)
 │   ├── sample_docs/                                              # Sample policy PDFs & manuals for instant testing
 │   ├── tests/                                                    # 16 Pytest automated verification tests
@@ -107,7 +116,7 @@ datheon-projects/
 │   ├── .env.example                                              # Environment variable template
 │   └── README.md                                                 # Dedicated project documentation
 │
-└── Structured LLM Prompt Pipeline & JSON Extractor/              # Project 04: Structured JSON Extractor
+└── Structured LLM Prompt Pipeline - JSON Extractor/              # Project 04: Structured JSON Extractor
     ├── src/extractor/                                            # Classifier, schemas, verification agent, REST API
     ├── tests/                                                    # 35 Pytest unit and integration tests
     ├── main.py                                                   # Uvicorn / FastAPI server entrypoint
@@ -120,62 +129,36 @@ datheon-projects/
 
 ---
 
-## 🚀 Step-by-Step Git Setup & Pushing to GitHub
+## 📦 Requirements & Dependency Management
 
-Follow these exact steps to push this entire repository to your GitHub account:
+You can install dependencies either all at once or individually for each project:
 
-### Step 1: Create a New Repository on GitHub
-1. Open your browser and navigate to [github.com/new](https://github.com/new).
-2. Set your repository name (for example, `datheon-ai-suite` or `datheon-projects`).
-3. Set the visibility to **Public** (or **Private**).
-4. **Important**: Leave "Add a README file", "Add .gitignore", and "Choose a license" **UNCHECKED** (we already created customized ones for you).
-5. Click **Create repository**.
-6. Copy the HTTPS or SSH repository URL (e.g., `https://github.com/your-username/datheon-ai-suite.git`).
+```bash
+# 1. Install all dependencies across the entire suite:
+pip install -r requirements.txt
 
-### Step 2: Initialize Git and Stage Files Safely
-Open PowerShell or your terminal in this root folder (`e:\datheon projects`):
+# 2. Or install from the modular requirements/ directory:
+pip install -r requirements/all.txt
 
-```powershell
-# 1. Initialize Git in the root directory
-git init
-
-# 2. Set the default branch to main
-git branch -M main
-
-# 3. Verify .gitignore is in place (ensures .venv and .env files are NOT added)
-git status
-```
-
-> [!IMPORTANT]
-> The root `.gitignore` protects your secret `.env` files and gigabytes of `.venv` directories. Before committing, run `git status` and verify that no `.env` or `.venv` directories are staged.
-
-### Step 3: Commit and Push
-```powershell
-# 4. Stage all project files and documentation
-git add .
-
-# 5. Create the initial commit
-git commit -m "feat: initial release of Datheon AI Engineering Suite with 4 projects, unified README, and deployment configs"
-
-# 6. Link to your remote GitHub repository
-git remote add origin https://github.com/your-username/your-repo-name.git
-
-# 7. Push to GitHub
-git push -u origin main
+# 3. Or install dependencies for an individual project only:
+pip install -r requirements/datheon_testing_ai.txt
+pip install -r requirements/document_qa_rag.txt
+pip install -r requirements/multi_tool_agent.txt
+pip install -r requirements/structured_llm_extractor.txt
 ```
 
 ---
 
 ## ☁️ Deployment Matrix & Step-by-Step Hosting Guide
 
-Deploying a multi-project monorepo is clean, modular, and free. Here is the recommended hosting target for each project:
+Deploying this multi-project monorepo is modular, streamlined, and free:
 
 | Project | Best Platform | Pricing Tier | Entry File / Build Configuration |
 | :--- | :--- | :--- | :--- |
 | **01. Datheon Testing AI** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Datheon_Testing_AI/app.py` |
-| **02. Document Q&A Assistant** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Document Q&A Assistant with RAG & Vector Embedding/app.py` |
+| **02. Document Q-A Assistant** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Document Q-A Assistant with RAG  Vector Embedding/app.py` |
 | **03. Multi-Tool Autonomous Agent** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Multi-Tool Autonomous AI Agent/web_app.py` |
-| **04. Structured LLM Extractor** | [Render.com](https://render.com) | **100% Free** | Root dir: `Structured LLM Prompt Pipeline & JSON Extractor`<br>Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT` |
+| **04. Structured LLM Extractor** | [Render.com](https://render.com) | **100% Free** | Root dir: `Structured LLM Prompt Pipeline - JSON Extractor`<br>Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT` |
 
 ---
 
@@ -186,13 +169,13 @@ Streamlit Community Cloud allows you to host multiple applications from the same
 1. Log in to [share.streamlit.io](https://share.streamlit.io) with your GitHub account.
 2. Click **Create app** -> **I already have an app**.
 3. Fill in the details:
-   - **Repository**: `your-username/your-repo-name`
+   - **Repository**: `NikhilKumarKotte/Datheon-ai-projects`
    - **Branch**: `main`
 4. **Specify the exact file path for each app**:
    - For **Datheon Testing AI**:
      - `Main file path`: `Datheon_Testing_AI/app.py`
-   - For **Document Q&A Assistant**:
-     - `Main file path`: `Document Q&A Assistant with RAG & Vector Embedding/app.py`
+   - For **Document Q-A Assistant**:
+     - `Main file path`: `Document Q-A Assistant with RAG  Vector Embedding/app.py`
    - For **Multi-Tool Autonomous AI Agent**:
      - `Main file path`: `Multi-Tool Autonomous AI Agent/web_app.py`
 5. **Configure Secrets / API Keys**:
@@ -213,12 +196,12 @@ Render is the ideal free cloud platform for FastAPI web applications with backgr
 
 1. Create a free account at [dashboard.render.com](https://dashboard.render.com).
 2. Click **New +** -> **Web Service**.
-3. Connect your GitHub repository.
+3. Connect your GitHub repository: `NikhilKumarKotte/Datheon-ai-projects`.
 4. Fill in the service configuration:
    - **Name**: `datheon-structured-extractor`
    - **Region**: Closest to you (e.g., Frankfurt, Oregon, Singapore)
    - **Branch**: `main`
-   - **Root Directory**: `Structured LLM Prompt Pipeline & JSON Extractor` *(Crucial: ensures Render executes in the right subfolder)*
+   - **Root Directory**: `Structured LLM Prompt Pipeline - JSON Extractor` *(Ensures Render builds in the right subfolder)*
    - **Runtime**: `Python 3`
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
@@ -235,8 +218,8 @@ Render is the ideal free cloud platform for FastAPI web applications with backgr
 Every project in this suite includes a dedicated automated test suite verifying edge cases, zero-division, sandboxing security, schema validation, and retrieval accuracy:
 
 ```powershell
-# Run tests for Project 02 (Document Q&A RAG) - 16 Tests
-cd "Document Q&A Assistant with RAG & Vector Embedding"
+# Run tests for Project 02 (Document Q-A Assistant) - 16 Tests
+cd "Document Q-A Assistant with RAG  Vector Embedding"
 python -m pytest tests/ -v
 cd ..
 
@@ -246,7 +229,7 @@ python -m pytest tests/ -v
 cd ..
 
 # Run tests for Project 04 (Structured LLM Extractor) - 35 Tests
-cd "Structured LLM Prompt Pipeline & JSON Extractor"
+cd "Structured LLM Prompt Pipeline - JSON Extractor"
 python -m pytest tests/ -v
 cd ..
 ```
