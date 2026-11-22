@@ -33,7 +33,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     app = FastAPI(
         title="Structured LLM Extractor API",
-        description="Multi-provider structured document extraction with Gemini, Groq, OpenAI-compatible APIs, and Pydantic validation.",
+        description="Production API for schema-constrained document extraction with Gemini and Pydantic.",
         version="1.0.0",
         docs_url="/docs",
         redoc_url="/redoc",

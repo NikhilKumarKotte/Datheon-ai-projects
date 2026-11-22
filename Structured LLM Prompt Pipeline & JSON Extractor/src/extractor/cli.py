@@ -5,11 +5,6 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-if hasattr(sys.stdout, "reconfigure"):
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-if hasattr(sys.stderr, "reconfigure"):
-    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
-
 from src.extractor.config import get_settings
 from src.extractor.core.exceptions import ExtractorError
 from src.extractor.core.service import ExtractorService
@@ -35,6 +30,13 @@ def build_parser() -> argparse.ArgumentParser:
         help=f"Document schema type: 'auto' (autonomous classification) or {', '.join(registry.list_types())} (default: auto)",
     )
     extract_group.add_argument(
+        "--provider",
+        "-p",
+        choices=["auto", "gemini", "groq", "cerebras", "openrouter"],
+        default="auto",
+        help="LLM provider: 'auto', 'gemini', 'groq', 'cerebras', or 'openrouter' (default: auto)",
+    )
+    extract_group.add_argument(
         "--input",
         "-i",
         help="Path to document file (PDF, Word DOCX, Image, Text, CSV)",
@@ -49,7 +51,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--model",
         "-m",
         default=None,
-        help="Gemini model name (default: from DEFAULT_MODEL in .env)",
+        help="Model name override (e.g. 'llama-3.3-70b-versatile', 'gemini-3.5-flash-lite')",
     )
     extract_group.add_argument(
         "--demo",
@@ -87,6 +89,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Print all registered document schemas and exit",
     )
+    parser.add_argument(
+        "--list-providers",
+        action="store_true",
+        help="Print all supported LLM providers (Gemini, Groq, Cerebras, OpenRouter) and exit",
+    )
 
     return parser
 
@@ -98,16 +105,9 @@ def run_server(host: Optional[str] = None, port: Optional[int] = None, reload: b
     server_host = host or settings.server_host
     server_port = port or settings.server_port
 
-    if hasattr(sys.stdout, "reconfigure"):
-        try:
-            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-            sys.stderr.reconfigure(encoding="utf-8", errors="replace")
-        except Exception:
-            pass
-
-    print(f"[*] Starting Structured LLM Extractor server on http://{server_host}:{server_port}")
-    print(f"[*] Interactive Swagger API Docs: http://{server_host}:{server_port}/docs")
-    print(f"[*] Web UI Dashboard:            http://{server_host}:{server_port}/")
+    print(f"[+] Starting Structured LLM Extractor server on http://{server_host}:{server_port}")
+    print(f"[+] Interactive Swagger API Docs: http://{server_host}:{server_port}/docs")
+    print(f"[+] Web UI Dashboard:            http://{server_host}:{server_port}/")
     uvicorn.run(
         "src.extractor.api.app:app",
         host=server_host,
@@ -123,6 +123,19 @@ def list_schemas() -> None:
         print(f"\n  - [{item['type'].upper()}] - {item['title']}")
         print(f"    Description: {item['description']}")
         print(f"    Required Fields: {item['json_schema'].get('required', [])}")
+
+
+def list_providers() -> None:
+    """Display information about supported LLM providers and configuration status."""
+    from src.extractor.providers import provider_registry
+    print("Supported Multi-LLM Providers:")
+    for p in provider_registry.get_metadata():
+        status_tag = "[CONFIGURED]" if p["configured"] else "[MISSING API KEY]"
+        print(f"\n  - {status_tag} {p['name']} ({p['id']})")
+        print(f"    Badge:           {p['badge']}")
+        print(f"    Default Model:   {p['default_model']}")
+        print(f"    Available Models: {', '.join(p['available_models'])}")
+        print(f"    Multimodal:      {'Yes' if p['supports_multimodal'] else 'No (Text/JSON only)'}")
 
 
 def run_extraction(args: argparse.Namespace) -> None:
@@ -141,10 +154,12 @@ def run_extraction(args: argparse.Namespace) -> None:
 
     try:
         mode_str = " (DEMO MODE)" if args.demo else ""
-        print(f"Extracting '{args.type}' from {args.input}{mode_str}...")
+        prov_str = f" via {args.provider.upper()}" if args.provider != "auto" else " (Auto-Routed)"
+        print(f"Extracting '{args.type}' from {args.input}{prov_str}{mode_str}...")
         result = service.extract(
             document=input_path,
             document_type=args.type,
+            provider=args.provider,
             model_name=args.model,
             demo_mode=args.demo,
         )
@@ -158,7 +173,8 @@ def run_extraction(args: argparse.Namespace) -> None:
         print("----------------------")
         print(f"[+] Saved validated JSON to: {output_path.resolve()}")
         print(
-            f"[+] Metadata: Schema={result.metadata.document_type}, "
+            f"[+] Metadata: Provider={result.metadata.provider_used}, "
+            f"Schema={result.metadata.document_type}, "
             f"Format={result.metadata.input_format}, "
             f"Model={result.metadata.model_used}, "
             f"Latency={result.metadata.duration_ms}ms"
@@ -187,11 +203,15 @@ def main() -> None:
         list_schemas()
         return
 
+    if args.list_providers:
+        list_providers()
+        return
+
     if args.serve:
         run_server(host=args.host, port=args.port, reload=args.reload)
         return
 
-    # If no serve or list-schemas flag, require extraction arguments
+    # If no serve or list flags, require extraction arguments
     if args.type or args.input:
         run_extraction(args)
     else:

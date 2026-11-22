@@ -286,7 +286,7 @@ with st.sidebar:
     model_options = {
         "Google Gemini": ["gemini-2.5-flash", "gemini-2.0-flash"],
         "OpenAI": ["gpt-4o-mini", "gpt-4.1-mini"],
-        "Groq": ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"],
+        "Groq": ["openai/gpt-oss-120b", "openai/gpt-oss-20b"],
         "Demo mode (no API key)": ["demo"]
     }
     model_name = st.selectbox("Model", model_options[provider])
@@ -363,7 +363,7 @@ if not st.session_state.messages:
             st.rerun()
 
 for message in st.session_state.messages:
-    with st.chat_message(message["role"], avatar="🧑‍💻" if message["role"] == "user" else "✦"):
+    with st.chat_message(message["role"], avatar="🧑‍💻" if message["role"] == "user" else "🤖"):
         st.markdown(message["content"])
 
 prompt = st.chat_input("Message Datheon Testing AI…")
@@ -378,8 +378,13 @@ if prompt:
         index_for_memory(st.session_state.chat_id, "user", prompt)
     with st.chat_message("user", avatar="🧑‍💻"):
         st.markdown(prompt)
-    with st.chat_message("assistant", avatar="✦"):
+    with st.chat_message("assistant", avatar="🤖"):
         try:
+            if provider != "Demo mode (no API key)" and not api_key.strip():
+                raise ValueError(
+                    f"No API key entered for {provider}. Open AI configuration in the sidebar, "
+                    "paste a valid API key, and send your question again."
+                )
             # Recent profile includes the new user message; context is limited to the recent window.
             current_profile = recent_profile(st.session_state.messages)
             adaptive_system = system_prompt + memory_prompt(current_profile)
@@ -388,7 +393,7 @@ if prompt:
                 older_memories = retrieve_semantic_memory(
                     st.session_state.chat_id, prompt, st.session_state.messages[:-1], limit=4
                 )
-            stream = response_stream(st.session_state.messages[:-1], provider, model_name, api_key,
+            stream = response_stream(st.session_state.messages, provider, model_name, api_key,
                                      temperature, adaptive_system, older_memories)
             answer = st.write_stream(stream)
             if not answer:
@@ -399,6 +404,13 @@ if prompt:
                 index_for_memory(st.session_state.chat_id, "assistant", answer)
             st.caption(f"✓ Response complete · {len(answer.split())} words")
         except Exception as exc:
-            st.error(f"Unable to generate a response: {exc}")
-            st.info("Check the provider API key, account quota, selected model, and internet connection.")
-    st.rerun()
+            error_text = str(exc)
+            st.error(f"Unable to generate a response: {error_text}")
+            if "model_not_found" in error_text or "does not exist" in error_text or "404" in error_text:
+                st.warning(
+                    "The selected model ID is unavailable to your provider account. "
+                    "For Groq, try `openai/gpt-oss-120b` or `openai/gpt-oss-20b` from the Model menu, "
+                    "or choose another model currently enabled in your Groq Console."
+                )
+            else:
+                st.info("Check the provider API key, account quota, selected model, and internet connection.")

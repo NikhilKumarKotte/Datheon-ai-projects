@@ -51,3 +51,40 @@ def test_extract_file_upload_endpoint(test_client):
     assert response.status_code == 200
     res_data = response.json()
     assert res_data["data"]["invoice_number"] == "TEST-123"
+
+
+def test_get_settings_keys_endpoint(test_client):
+    response = test_client.get("/api/v1/settings/keys")
+    assert response.status_code == 200
+    data = response.json()
+    assert "gemini" in data
+    assert "groq" in data
+    assert "cerebras" in data
+    assert "openrouter" in data
+    for prov in ("gemini", "groq", "cerebras", "openrouter"):
+        assert "configured" in data[prov]
+        assert "masked" in data[prov]
+
+
+def test_post_settings_keys_endpoint(test_client):
+    try:
+        payload = {
+            "groq_api_key": "gsk_test1234567890abcdef",
+            "persist_to_env": False,
+        }
+        response = test_client.post("/api/v1/settings/keys", json=payload)
+        assert response.status_code == 200
+        res_data = response.json()
+        assert res_data["status"] == "success"
+        assert res_data["keys"]["groq"] is True
+
+        # Verify GET reflects the new key
+        get_res = test_client.get("/api/v1/settings/keys")
+        get_data = get_res.json()
+        assert get_data["groq"]["configured"] is True
+        assert get_data["groq"]["masked"].startswith("gsk_")
+        assert get_data["groq"]["masked"].endswith("cdef")
+    finally:
+        from src.extractor.config import update_api_keys
+        update_api_keys(groq_key="", persist_to_env=False)
+
