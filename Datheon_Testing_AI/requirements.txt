@@ -1,0 +1,10 @@
+streamlit>=1.41,<2.0
+python-dotenv>=1.0,<2.0
+langchain-core>=0.3,<2.0
+langchain-google-genai>=2.0,<5.0
+langchain-openai>=0.3,<2.0
+langchain-groq>=0.3,<1.0
+
+# Local semantic memory (embedding model downloads on first run)
+chromadb>=0.5,<2.0
+sentence-transformers>=3.0,<6.0

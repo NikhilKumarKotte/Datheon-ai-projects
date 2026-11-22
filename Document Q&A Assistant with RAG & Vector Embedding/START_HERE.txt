@@ -1,0 +1,61 @@
+DOCUMENT Q&A ASSISTANT — COMPLETE PROJECT
+==========================================
+
+IMPORTANT
+This is the complete project folder. You do NOT need to replace individual files.
+Extract this ZIP, open the extracted folder, and run the commands below.
+
+WINDOWS SETUP
+-------------
+1. Install Python 3.11 (recommended) and make sure "Add Python to PATH" is checked.
+2. Extract this ZIP.
+3. Open the folder named Document_QA_RAG_Complete.
+4. Click the folder address bar, type cmd, and press Enter.
+5. Run these commands one at a time:
+
+   python -m venv .venv
+   .venv\Scripts\activate
+   python -m pip install --upgrade pip
+   pip install -r requirements.txt
+   copy .env.example .env
+   streamlit run app.py
+
+6. Open the local Streamlit URL shown in the terminal (usually http://localhost:8501).
+7. Upload your PDF and click the document indexing/ingestion button.
+8. Ask: "Give abstract".
+
+API KEYS
+--------
+The project can use a local extractive answering mode. Cloud LLM providers require
+the matching API key in the .env file. Never share your .env file or API keys.
+
+VECTOR DATABASE
+---------------
+This ZIP intentionally does not include old ChromaDB/FAISS indexes. The app creates
+a fresh local index when you upload and index your documents. Re-index your PDFs
+after extracting this project.
+
+WHAT WAS CHANGED
+----------------
+- Added hybrid dense + lexical retrieval.
+- Added section-aware retrieval for requests such as abstract, conclusion,
+  objectives, problem statement, summary, and methodology.
+- Retrieves chunks from the page containing the requested section heading.
+- Merges overlapping chunks for section extraction.
+- Renamed "Verified Source Citations" to "Retrieved Source Passages".
+- Added targeted tests and RAG evaluation guidance.
+
+VERIFY THE INSTALLATION
+-----------------------
+Run:
+   python -m pytest -q
+
+Tests must be run locally after dependencies are installed. Passing Python syntax
+compilation is not the same as a successful runtime or retrieval test.
+
+TROUBLESHOOTING
+---------------
+- If a package installation fails, send the complete terminal error.
+- If the app starts but retrieves the wrong page, send a screenshot of the question,
+  answer, and Retrieved Source Passages panel.
+- Do not delete your original project folder until this complete version works.

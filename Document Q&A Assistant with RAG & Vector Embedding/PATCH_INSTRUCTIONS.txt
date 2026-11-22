@@ -1,0 +1,63 @@
+DOCUMENT Q&A RAG — ANSWER QUALITY PATCH (CHANGED FILES ONLY)
+
+This patch is based on the project files previously supplied in this conversation,
+including the working Groq model configuration. It does not replace the project.
+
+CHANGED FILES
+1. src/rag_pipeline.py
+2. src/vector_store.py
+3. tests/test_intent_and_evidence_patch.py (new regression tests)
+
+WHAT THIS FIXES
+
+1. Explanation requests were being mistaken for exact extraction requests.
+   For example, "Explain the methodology" was routed to local extractive output
+   instead of Groq synthesis. Section extraction now requires explicit extraction
+   intent such as "show", "extract", "print", "give abstract", or "show the
+   complete table of contents".
+
+2. Broad explanation questions now retrieve up to 8 chunks (or the configured
+   top_k if higher), improving context coverage for architecture, methodology,
+   workflow, and component questions.
+
+3. A conservative evidence guard prevents the LLM from answering when retrieved
+   passages have no meaningful lexical overlap with the question. It also rejects
+   numeric business-metric questions such as annual revenue when the retrieved
+   context contains no corresponding numeric value.
+
+4. If Groq generates a useful answer but omits citation tags, the answer is kept
+   and a transparent list of retrieved source pages is attached. If it emits
+   page citations that were not retrieved, those invalid tags are removed and
+   the retrieved source list is shown instead. This is a source list, not a
+   claim-by-claim entailment guarantee.
+
+PRESERVED
+- Groq provider and openai/gpt-oss-120b model configuration
+- HuggingFace all-MiniLM-L6-v2 embeddings
+- Existing ChromaDB / FAISS indices
+- Existing uploaded PDFs
+- Existing dependencies and requirements
+- Existing upload and indexing flow
+
+HOW TO APPLY
+1. Stop Streamlit.
+2. Back up the two existing files:
+   app-folder/src/rag_pipeline.py
+   app-folder/src/vector_store.py
+3. Extract this ZIP into the root of your existing project folder.
+4. Allow it to replace only those two files and add the new test file.
+5. Restart:
+   streamlit run app.py
+6. Do NOT reset the vector store and do NOT re-index for this patch.
+
+VALIDATION
+- Both changed source files passed Python syntax compilation.
+- Targeted intent/evidence logic checks passed.
+- Full pytest execution could not be run in this build environment because
+  langchain_core is not installed here. Your project's own virtual environment
+  already has the dependencies; you can run:
+  pytest -q
+
+IMPORTANT LIMITATION
+The evidence guard is a conservative heuristic, not a complete semantic
+entailment model. Always inspect retrieved source pages for high-stakes claims.
