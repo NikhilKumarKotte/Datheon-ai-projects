@@ -10,9 +10,9 @@ This directory provides modular and consolidated dependency manifests for the **
 | :--- | :--- | :--- |
 | [`all.txt`](./all.txt) | **Master Unified Suite** | Installs all dependencies for all 4 projects simultaneously |
 | [`datheon_testing_ai.txt`](./datheon_testing_ai.txt) | Conversational AI Workspace | `Datheon_Testing_AI` |
-| [`document_qa_rag.txt`](./document_qa_rag.txt) | Enterprise RAG & Vector Embeddings | `Document Q-A Assistant with RAG  Vector Embedding` |
-| [`multi_tool_agent.txt`](./multi_tool_agent.txt) | Autonomous ReAct Research Agent | `Multi-Tool Autonomous AI Agent` |
-| [`structured_llm_extractor.txt`](./structured_llm_extractor.txt) | Document Extraction REST API | `Structured LLM Prompt Pipeline - JSON Extractor` |
+| [`document_qa_rag.txt`](./document_qa_rag.txt) | Enterprise RAG & Vector Embeddings | `Document_QA_RAG_Assistant` |
+| [`multi_tool_agent.txt`](./multi_tool_agent.txt) | Autonomous ReAct Research Agent | `Multi_Tool_Autonomous_AI_Agent` |
+| [`structured_llm_extractor.txt`](./structured_llm_extractor.txt) | Document Extraction REST API | `Structured_LLM_Extractor` |
 
 ---
 

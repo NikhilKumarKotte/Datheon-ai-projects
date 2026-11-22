@@ -306,7 +306,7 @@ You can deploy this application for free on **Streamlit Community Cloud** with z
 3. **Deploy New App**:
    - **Repository**: Select your repository (e.g. `your-username/your-repo-name`).
    - **Branch**: `main`
-   - **Main file path**: `Document Q&A Assistant with RAG & Vector Embedding/app.py`
+   - **Main file path**: `Document_QA_RAG_Assistant/app.py`
 4. **Configure Secrets / API Keys**:
    - Click **Advanced settings...** -> **Secrets**.
    - Paste any optional LLM API keys:

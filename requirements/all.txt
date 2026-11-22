@@ -2,10 +2,10 @@
 # Datheon AI Engineering Suite — Consolidated Master Requirements
 # ==============================================================================
 # Covers all 4 projects:
-# 1. Datheon Testing AI
-# 2. Document Q-A Assistant with RAG & Vector Embedding
-# 3. Multi-Tool Autonomous AI Agent
-# 4. Structured LLM Prompt Pipeline & JSON Extractor
+# 1. Datheon_Testing_AI
+# 2. Document_QA_RAG_Assistant
+# 3. Multi_Tool_Autonomous_AI_Agent
+# 4. Structured_LLM_Extractor
 # ==============================================================================
 
 # Web Frameworks & Presentation

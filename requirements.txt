@@ -3,9 +3,9 @@
 # ==============================================================================
 # Installs complete, unified dependencies across all 4 projects:
 # - Datheon_Testing_AI
-# - Document Q-A Assistant with RAG  Vector Embedding
-# - Multi-Tool Autonomous AI Agent
-# - Structured LLM Prompt Pipeline - JSON Extractor
+# - Document_QA_RAG_Assistant
+# - Multi_Tool_Autonomous_AI_Agent
+# - Structured_LLM_Extractor
 #
 # For individual project requirements, see the /requirements folder.
 # ==============================================================================

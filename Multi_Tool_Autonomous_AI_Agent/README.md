@@ -390,7 +390,7 @@ You can host the autonomous multi-tool agent interactive web dashboard online fo
 3. **Deploy New App**:
    - **Repository**: Choose your GitHub repository.
    - **Branch**: `main`
-   - **Main file path**: `Multi-Tool Autonomous AI Agent/web_app.py`
+   - **Main file path**: `Multi_Tool_Autonomous_AI_Agent/web_app.py`
 4. **Configure Secrets**:
    - Under **Advanced settings...** -> **Secrets**, supply your API keys:
      ```toml

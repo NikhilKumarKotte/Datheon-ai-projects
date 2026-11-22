@@ -18,9 +18,9 @@
 | # | Project Name | Primary Focus | Core Technologies | User Interface | Live Deployment Target |
 | :-: | :--- | :--- | :--- | :--- | :--- |
 | **01** | [**Datheon Testing AI**](./Datheon_Testing_AI/README.md) | Adaptive Chatbot & Dual Memory | Streamlit, LangChain, ChromaDB, Sentence-Transformers, SQLite3 | Dark, Light & Midnight Streamlit Chat UI | **Streamlit Community Cloud** |
-| **02** | [**Document Q-A Assistant**](./Document%20Q-A%20Assistant%20with%20RAG%20%20Vector%20Embedding/README.md) | Enterprise RAG & Vector Embeddings | LangChain, ChromaDB, FAISS, PyPDF, HuggingFace, Web Speech API | Linear-inspired Streamlit UI + Terminal CLI | **Streamlit Community Cloud** |
-| **03** | [**Multi-Tool Autonomous AI Agent**](./Multi-Tool%20Autonomous%20AI%20Agent/README.md) | Autonomous ReAct Research Agent | LangChain, DuckDuckGo Search, Safe AST Math, Sandboxed File Reader | Obsidian Streamlit UI + Interactive REPL | **Streamlit Cloud / Docker** |
-| **04** | [**Structured LLM Extractor**](./Structured%20LLM%20Prompt%20Pipeline%20-%20JSON%20Extractor/README.md) | Universal Document Parser & REST API | FastAPI, Gemini Structured Outputs, Pydantic v2, OCR Vision | Glassmorphism Web Dashboard + OpenAPI Docs | **Render / Cloud Run** |
+| **02** | [**Document Q&A Assistant**](./Document_QA_RAG_Assistant/README.md) | Enterprise RAG & Vector Embeddings | LangChain, ChromaDB, FAISS, PyPDF, HuggingFace, Web Speech API | Linear-inspired Streamlit UI + Terminal CLI | **Streamlit Community Cloud** |
+| **03** | [**Multi-Tool Autonomous AI Agent**](./Multi_Tool_Autonomous_AI_Agent/README.md) | Autonomous ReAct Research Agent | LangChain, DuckDuckGo Search, Safe AST Math, Sandboxed File Reader | Obsidian Streamlit UI + Interactive REPL | **Streamlit Cloud / Docker** |
+| **04** | [**Structured LLM Extractor**](./Structured_LLM_Extractor/README.md) | Universal Document Parser & REST API | FastAPI, Gemini Structured Outputs, Pydantic v2, OCR Vision | Glassmorphism Web Dashboard + OpenAPI Docs | **Render / Cloud Run** |
 
 ---
 
@@ -39,7 +39,7 @@ flowchart TD
             P1_LLM --> P1_DB[("Local SQLite History")]
         end
 
-        subgraph P2 ["02. Document Q-A Assistant (RAG)"]
+        subgraph P2 ["02. Document Q&A Assistant (RAG)"]
             P2_Input["PDF / TXT Ingestion"] --> P2_Chunk["Recursive Chunker (Page-Tracked)"]
             P2_Chunk --> P2_VDB["Dual Vector Stores (ChromaDB / FAISS)"]
             P2_Query["User Question"] --> P2_HyDE["Multi-Query Expansion & Contextualizer"]
@@ -95,7 +95,7 @@ datheon-projects/
 │   ├── .env.example                                              # Environment variable template
 │   └── README.md                                                 # Dedicated project documentation
 │
-├── Document Q-A Assistant with RAG  Vector Embedding/            # Project 02: Enterprise RAG System
+├── Document_QA_RAG_Assistant/                                    # Project 02: Enterprise RAG System
 │   ├── src/                                                      # Core RAG library (loaders, chunkers, vector store)
 │   ├── sample_docs/                                              # Sample policy PDFs & manuals for instant testing
 │   ├── tests/                                                    # 16 Pytest automated verification tests
@@ -106,7 +106,7 @@ datheon-projects/
 │   ├── .env.example                                              # Environment variable template
 │   └── README.md                                                 # Dedicated project documentation
 │
-├── Multi-Tool Autonomous AI Agent/                               # Project 03: ReAct Research Agent
+├── Multi_Tool_Autonomous_AI_Agent/                               # Project 03: ReAct Research Agent
 │   ├── agent/                                                    # ReAct core, model adapters, tool implementations
 │   ├── sample_data/                                              # Sample reports & data files for compound research
 │   ├── tests/                                                    # 19 Pytest automated unit/integration tests
@@ -116,7 +116,7 @@ datheon-projects/
 │   ├── .env.example                                              # Environment variable template
 │   └── README.md                                                 # Dedicated project documentation
 │
-└── Structured LLM Prompt Pipeline - JSON Extractor/              # Project 04: Structured JSON Extractor
+└── Structured_LLM_Extractor/                                     # Project 04: Structured JSON Extractor
     ├── src/extractor/                                            # Classifier, schemas, verification agent, REST API
     ├── tests/                                                    # 35 Pytest unit and integration tests
     ├── main.py                                                   # Uvicorn / FastAPI server entrypoint
@@ -156,9 +156,9 @@ Deploying this multi-project monorepo is modular, streamlined, and free:
 | Project | Best Platform | Pricing Tier | Entry File / Build Configuration |
 | :--- | :--- | :--- | :--- |
 | **01. Datheon Testing AI** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Datheon_Testing_AI/app.py` |
-| **02. Document Q-A Assistant** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Document Q-A Assistant with RAG  Vector Embedding/app.py` |
-| **03. Multi-Tool Autonomous Agent** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Multi-Tool Autonomous AI Agent/web_app.py` |
-| **04. Structured LLM Extractor** | [Render.com](https://render.com) | **100% Free** | Root dir: `Structured LLM Prompt Pipeline - JSON Extractor`<br>Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT` |
+| **02. Document Q&A Assistant** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Document_QA_RAG_Assistant/app.py` |
+| **03. Multi-Tool Autonomous Agent** | [Streamlit Community Cloud](https://share.streamlit.io) | **100% Free** | Main file: `Multi_Tool_Autonomous_AI_Agent/web_app.py` |
+| **04. Structured LLM Extractor** | [Render.com](https://render.com) | **100% Free** | Root dir: `Structured_LLM_Extractor`<br>Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT` |
 
 ---
 
@@ -171,13 +171,13 @@ Streamlit Community Cloud allows you to host multiple applications from the same
 3. Fill in the details:
    - **Repository**: `NikhilKumarKotte/Datheon-ai-projects`
    - **Branch**: `main`
-4. **Specify the exact file path for each app**:
+4. **Specify the exact file path for each app (No spaces in paths!)**:
    - For **Datheon Testing AI**:
      - `Main file path`: `Datheon_Testing_AI/app.py`
-   - For **Document Q-A Assistant**:
-     - `Main file path`: `Document Q-A Assistant with RAG  Vector Embedding/app.py`
+   - For **Document Q&A Assistant**:
+     - `Main file path`: `Document_QA_RAG_Assistant/app.py`
    - For **Multi-Tool Autonomous AI Agent**:
-     - `Main file path`: `Multi-Tool Autonomous AI Agent/web_app.py`
+     - `Main file path`: `Multi_Tool_Autonomous_AI_Agent/web_app.py`
 5. **Configure Secrets / API Keys**:
    - Click **Advanced settings...** -> **Secrets**.
    - Paste your API keys (Gemini, OpenAI, Groq, etc.):
@@ -201,7 +201,7 @@ Render is the ideal free cloud platform for FastAPI web applications with backgr
    - **Name**: `datheon-structured-extractor`
    - **Region**: Closest to you (e.g., Frankfurt, Oregon, Singapore)
    - **Branch**: `main`
-   - **Root Directory**: `Structured LLM Prompt Pipeline - JSON Extractor` *(Ensures Render builds in the right subfolder)*
+   - **Root Directory**: `Structured_LLM_Extractor` *(Ensures Render builds in the right subfolder)*
    - **Runtime**: `Python 3`
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
@@ -218,18 +218,18 @@ Render is the ideal free cloud platform for FastAPI web applications with backgr
 Every project in this suite includes a dedicated automated test suite verifying edge cases, zero-division, sandboxing security, schema validation, and retrieval accuracy:
 
 ```powershell
-# Run tests for Project 02 (Document Q-A Assistant) - 16 Tests
-cd "Document Q-A Assistant with RAG  Vector Embedding"
+# Run tests for Project 02 (Document Q&A Assistant) - 16 Tests
+cd "Document_QA_RAG_Assistant"
 python -m pytest tests/ -v
 cd ..
 
 # Run tests for Project 03 (Multi-Tool Autonomous Agent) - 19 Tests
-cd "Multi-Tool Autonomous AI Agent"
+cd "Multi_Tool_Autonomous_AI_Agent"
 python -m pytest tests/ -v
 cd ..
 
 # Run tests for Project 04 (Structured LLM Extractor) - 35 Tests
-cd "Structured LLM Prompt Pipeline - JSON Extractor"
+cd "Structured_LLM_Extractor"
 python -m pytest tests/ -v
 cd ..
 ```
